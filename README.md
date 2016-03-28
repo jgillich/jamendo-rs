@@ -8,9 +8,9 @@ A Jamendo API client for Rust.
 
 ```rust
 let client = jamendo::Client::new(jamendo::TEST_ID);
-let response = client.get_albums().limit(15).unwrap();
+let albums = client.get_albums().limit(15).unwrap();
 
-for album in response.results.iter() {
+for album in albums.iter() {
   println!("{}", album.name);
 }
 ```
