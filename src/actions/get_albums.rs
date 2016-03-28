@@ -48,11 +48,11 @@ impl<'a> GetAlbums<'a> {
     // TODO imagesize
     // TODO audioformat
 
-    pub fn run(self) -> Result<Response<Album>, Error> {
-        self.transport.get("albums", self.query)
+    pub fn run(self) -> Result<Vec<Album>, Error> {
+        Ok(self.transport.get::<Album>("albums", self.query)?.results)
     }
 
-    pub fn unwrap(self) -> Response<Album> {
+    pub fn unwrap(self) -> Vec<Album> {
         self.run().unwrap()
     }
 }

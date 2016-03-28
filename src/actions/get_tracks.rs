@@ -96,11 +96,11 @@ impl<'a> GetTracks<'a> {
     // TODO groupby
     // TODO boost
 
-    pub fn run(self) -> Result<Response<Track>, Error> {
-        self.transport.get("tracks", self.query)
+    pub fn run(self) -> Result<Vec<Track>, Error> {
+        Ok(self.transport.get::<Track>("tracks", self.query)?.results)
     }
 
-    pub fn unwrap(self) -> Response<Track> {
+    pub fn unwrap(self) -> Vec<Track> {
         self.run().unwrap()
     }
 }
