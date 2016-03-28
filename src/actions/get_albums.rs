@@ -1,11 +1,8 @@
-use serde_json;
-use Error;
-use ErrorKind;
 use Transport;
 use Response;
 use Album;
 use std::collections::HashMap;
-use std::io::Read;
+use Error;
 
 pub struct GetAlbums<'a> {
     transport: &'a Transport,
@@ -52,18 +49,7 @@ impl<'a> GetAlbums<'a> {
     // TODO audioformat
 
     pub fn run(self) -> Result<Response<Album>, Error> {
-        let mut res = self.transport.get("albums", self.query_params).send()?;
-
-        let mut body = String::new();
-        try!(res.read_to_string(&mut body));
-
-        let response: Response<Album> = try!(serde_json::from_str(&body));
-
-        if response.headers.code != 0 {
-            Err(Error::from(ErrorKind::Api((response.headers.code, response.headers.error_message))))
-        } else {
-            Ok(response)
-        }
+        self.transport.get("albums", self.query_params)
     }
 
     pub fn unwrap(self) -> Response<Album> {
