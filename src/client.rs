@@ -18,4 +18,8 @@ impl Client {
     pub fn get_albums(&self) -> actions::GetAlbums {
         actions::GetAlbums::new(&self.transport)
     }
+
+    pub fn get_tracks(&self) -> actions::GetTracks {
+        actions::GetTracks::new(&self.transport)
+    }
 }
