@@ -2,6 +2,7 @@
 name = "jamendo"
 version = "0.1.0"
 authors = ["Jakob Gillich <jakob@gillich.me>"]
+license = "MIT"
 
 [dependencies]
 serde = "0.7"
