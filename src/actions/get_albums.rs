@@ -1,5 +1,4 @@
 use Transport;
-use Response;
 use Album;
 use std::collections::HashMap;
 use Error;
