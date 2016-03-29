@@ -24,7 +24,7 @@ impl Transport {
         }
     }
 
-    pub fn get<T: Deserialize>(&self, path: &str, mut query_pairs: HashMap<String, String>) -> Result<Response<T>, Error> {
+    pub fn get<T: Deserialize>(&self, path: &str, query_pairs: HashMap<String, String>) -> Result<Response<T>, Error> {
         let url = self.make_url(path, query_pairs);
         let mut res = try!(self.hyper_client.get(url).send());
 
@@ -33,10 +33,10 @@ impl Transport {
 
         let response: Response<T> = try!(serde_json::from_str(&body));
 
-        if response.headers.code != 0 {
-            Err(Error::from(ErrorKind::Api((response.headers.code, response.headers.error_message))))
-        } else {
+        if response.headers.code == 0 {
             Ok(response)
+        } else {
+            Err(Error::from(ErrorKind::Api((response.headers.code, response.headers.error_message))))
         }
     }
 
