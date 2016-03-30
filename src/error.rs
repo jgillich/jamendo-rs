@@ -19,7 +19,7 @@ impl std::error::Error for Error {
             &Error::Json(ref e) => e.description(),
             &Error::Client(ref e) => match e {
                 &ErrorKind::ResourceNotFound => "The resource does not exist",
-                &ErrorKind::Api((code, ref message)) => &message,
+                &ErrorKind::Api((_, ref message)) => &message,
             }
         }
     }
