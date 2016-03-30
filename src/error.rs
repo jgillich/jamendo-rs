@@ -11,6 +11,34 @@ pub enum Error {
 }
 
 
+impl std::error::Error for Error {
+    fn description(&self) -> &str {
+        match self {
+            &Error::Hyper(ref e) => e.description(),
+            &Error::Io(ref e) => e.description(),
+            &Error::Json(ref e) => e.description(),
+            &Error::Client(ref e) => match e {
+                &ErrorKind::ResourceNotFound => "The resource does not exist",
+                &ErrorKind::Api((code, ref message)) => &message,
+            }
+        }
+    }
+
+    fn cause(&self) -> Option<&std::error::Error> {
+        match self {
+            _ => None,
+        }
+    }
+}
+
+
+impl std::fmt::Display for Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> Result<(), std::fmt::Error> {
+        write!(f, "{}", std::error::Error::description(self))
+    }
+}
+
+
 impl From<hyper::Error> for Error {
     fn from(err: hyper::Error) -> Error {
         Error::Hyper(err)
