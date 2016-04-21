@@ -29,7 +29,6 @@ mod response;
 mod transport;
 
 /// The test client id. Changes regularly, do not use it in a real application!
-///
 pub const TEST_ID: &'static str = "56d30c95";
 
 pub use action::{Action, Resource, Query};
