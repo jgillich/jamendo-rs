@@ -26,12 +26,12 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
         self
     }
 
-    pub fn user_id(self, v: i32) -> Self { self.set(Query::UserId(v)) }
-    pub fn offset(self, v: i32) -> Self { self.set(Query::Offset(v)) }
-    pub fn limit(self, v: i32) -> Self { self.set(Query::Limit(v)) }
-    pub fn album_id(self, v: i32) -> Self { self.set(Query::AlbumId(v)) }
-    pub fn artist_id(self, v: i32) -> Self { self.set(Query::ArtistId(v)) }
-    pub fn track_id(self, v: i32) -> Self { self.set(Query::TrackId(v)) }
+    pub fn user_id(self, v: u32) -> Self { self.set(Query::UserId(v)) }
+    pub fn offset(self, v: u32) -> Self { self.set(Query::Offset(v)) }
+    pub fn limit(self, v: u32) -> Self { self.set(Query::Limit(v)) }
+    pub fn album_id(self, v: u32) -> Self { self.set(Query::AlbumId(v)) }
+    pub fn artist_id(self, v: u32) -> Self { self.set(Query::ArtistId(v)) }
+    pub fn track_id(self, v: u32) -> Self { self.set(Query::TrackId(v)) }
     pub fn album_name(self, v: &str) -> Self { self.set(Query::AlbumName(v.into())) }
     pub fn artist_name(self, v: &str) -> Self { self.set(Query::ArtistName(v.into())) }
     pub fn track_name(self, v: &str) -> Self { self.set(Query::TrackName(v.into())) }
@@ -109,12 +109,12 @@ pub enum Resource {
 
 /// A query parameter
 pub enum Query {
-    UserId(i32),
-    Offset(i32),
-    Limit(i32),
-    AlbumId(i32),
-    ArtistId(i32),
-    TrackId(i32),
+    UserId(u32),
+    Offset(u32),
+    Limit(u32),
+    AlbumId(u32),
+    ArtistId(u32),
+    TrackId(u32),
     AlbumName(String),
     ArtistName(String),
     TrackName(String),

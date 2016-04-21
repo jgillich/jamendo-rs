@@ -69,5 +69,5 @@ impl From<ErrorKind> for Error {
 pub enum ErrorKind {
     InvalidQuery,
     ResourceNotFound,
-    Api((i32, String))
+    Api((u32, String))
 }

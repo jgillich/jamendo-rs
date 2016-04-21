@@ -9,10 +9,10 @@ pub struct Response<T> {
 #[doc(hidden)]
 pub struct ResponseHeaders {
     pub status: String,
-    pub code: i32,
+    pub code: u32,
     pub error_message: String,
     pub warnings: String,
-    pub results_count: i32,
+    pub results_count: u32,
 }
 
 /// A album resource
@@ -46,14 +46,14 @@ pub struct Artist {
 pub struct Track {
     pub id: String,
     pub name: String,
-    pub duration: i32,
+    pub duration: u32,
     pub artist_id: String,
     pub artist_name: String,
     pub artist_idstr: String,
     pub album_name: String,
     pub album_id: String,
     pub license_ccurl: String,
-    pub position: i32,
+    pub position: u32,
     pub releasedate: String,
     pub album_image: String,
     pub audio: String,
