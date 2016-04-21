@@ -55,7 +55,7 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
         for q in self.query.iter() {
             query_pairs.push(match q {
                 &UserId(ref v) => match self.resource {
-                    GetUsersAlbums | GetUsersArtists | GetUsersTracks => ("user_id", v.to_string()),
+                    GetUsersAlbums | GetUsersArtists | GetUsersTracks => ("id", v.to_string()),
                     _ => return Err(Error::Client(ErrorKind::InvalidQuery)),
                 },
                 &Offset(ref v) => ("offset", v.to_string()),
@@ -97,7 +97,7 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
     }
 }
 
-#[doc(hidden)]
+/// A resource endpoint
 pub enum Resource {
     GetAlbums,
     GetUsersAlbums,

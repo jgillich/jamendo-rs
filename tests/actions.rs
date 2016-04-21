@@ -19,6 +19,13 @@ fn get_album() {
 }
 
 #[test]
+fn get_users_albums() {
+    let client = Client::new(jamendo::TEST_ID);
+    let users = client.get_users_albums().user_id(972174).unwrap();
+    assert_eq!(10, users.first().unwrap().albums.len());
+}
+
+#[test]
 fn get_artists() {
     let client = Client::new(jamendo::TEST_ID);
     let artists = client.get_artists().limit(15).unwrap();
@@ -30,6 +37,14 @@ fn get_artist() {
     let client = Client::new(jamendo::TEST_ID);
     let artists = client.get_artists().artist_id(5).unwrap();
     assert_eq!("Both", artists.first().unwrap().name);
+}
+
+
+#[test]
+fn get_users_artists() {
+    let client = Client::new(jamendo::TEST_ID);
+    let users = client.get_users_artists().user_id(972174).unwrap();
+    assert_eq!(10, users.first().unwrap().artists.len());
 }
 
 #[test]
@@ -44,4 +59,12 @@ fn get_track() {
     let client = Client::new(jamendo::TEST_ID);
     let tracks = client.get_tracks().track_id(1123578).unwrap();
     assert_eq!("Easier to run (Linkin Park cover)", tracks.first().unwrap().name);
+}
+
+
+#[test]
+fn get_users_tracks() {
+    let client = Client::new(jamendo::TEST_ID);
+    let users = client.get_users_tracks().user_id(972174).unwrap();
+    assert_eq!(10, users.first().unwrap().tracks.len());
 }
