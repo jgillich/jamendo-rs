@@ -18,6 +18,7 @@ impl std::error::Error for Error {
             &Error::Io(ref e) => e.description(),
             &Error::Json(ref e) => e.description(),
             &Error::Client(ref e) => match e {
+                &ErrorKind::InvalidQuery => "The query is not valid for the resource",
                 &ErrorKind::ResourceNotFound => "The resource does not exist",
                 &ErrorKind::Api((_, ref message)) => &message,
             }
@@ -65,6 +66,7 @@ impl From<ErrorKind> for Error {
 
 #[derive(Debug)]
 pub enum ErrorKind {
+    InvalidQuery,
     ResourceNotFound,
     Api((i32, String))
 }

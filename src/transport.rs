@@ -1,7 +1,6 @@
 use std::io::Read;
 use hyper;
 use url;
-use std::collections::HashMap;
 use Response;
 use serde_json;
 use Error;
@@ -24,7 +23,7 @@ impl Transport {
         }
     }
 
-    pub fn get<T: Deserialize>(&self, path: &str, query_pairs: HashMap<String, String>) -> Result<Response<T>, Error> {
+    pub fn get<T: Deserialize>(&self, path: &str, query_pairs: Vec<(&str, String)>) -> Result<Response<T>, Error> {
         let url = self.make_url(path, query_pairs);
         let mut res = try!(self.hyper_client.get(url).send());
 
@@ -40,13 +39,13 @@ impl Transport {
         }
     }
 
-    fn make_url(&self, path: &str, mut query_pairs: HashMap<String, String>) -> url::Url {
+    fn make_url(&self, path: &str, mut query_pairs: Vec<(&str, String)>) -> url::Url {
         let mut url = self.base_url.clone();
 
         url.path_mut().unwrap().push(path.to_string());
 
-        query_pairs.insert("client_id".to_string(), self.client_id.clone());
-        query_pairs.insert("format".to_string(), "json".to_string());
+        query_pairs.push(("client_id", self.client_id.clone()));
+        query_pairs.push(("format", "json".to_string()));
 
         url.set_query_from_pairs(query_pairs);
 

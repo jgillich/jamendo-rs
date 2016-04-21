@@ -12,7 +12,7 @@ fn get_albums() {
 #[test]
 fn get_album() {
     let client = Client::new(jamendo::TEST_ID);
-    let albums = client.get_albums().id(24).unwrap();
+    let albums = client.get_albums().album_id(24).unwrap();
     assert_eq!("Premiers Jets", albums.first().unwrap().name);
 }
 
@@ -26,7 +26,7 @@ fn get_artists() {
 #[test]
 fn get_artist() {
     let client = Client::new(jamendo::TEST_ID);
-    let artists = client.get_artists().id(5).unwrap();
+    let artists = client.get_artists().artist_id(5).unwrap();
     assert_eq!("Both", artists.first().unwrap().name);
 }
 
@@ -40,6 +40,6 @@ fn get_tracks() {
 #[test]
 fn get_track() {
     let client = Client::new(jamendo::TEST_ID);
-    let tracks = client.get_tracks().id(1123578).unwrap();
+    let tracks = client.get_tracks().track_id(1123578).unwrap();
     assert_eq!("Easier to run (Linkin Park cover)", tracks.first().unwrap().name);
 }

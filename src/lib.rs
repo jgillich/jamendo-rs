@@ -6,15 +6,18 @@ extern crate serde;
 extern crate serde_json;
 extern crate hyper;
 
-mod actions;
-mod models;
+mod action;
 mod client;
 mod error;
+mod response;
 mod transport;
 
-pub const TEST_ID: &'static str = "9d9f42e3";
+/// The test client id. Changes regularly, do not use it in a real application!
+/// To get your own, go to https://developer.jamendo.com/v3.0/authentication
+pub const TEST_ID: &'static str = "56d30c95";
 
-pub use models::*;
+pub use action::{Action, Resource, Query};
+pub use response::{Response, Album, Artist, Track};
 pub use client::Client;
 pub use error::{Error, ErrorKind};
 pub use transport::Transport;
