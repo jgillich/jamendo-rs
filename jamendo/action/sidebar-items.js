@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Query","A query parameter"],["Resource","A resource endpoint"]],"struct":[["Action","Action represents the request to a resource"]]});

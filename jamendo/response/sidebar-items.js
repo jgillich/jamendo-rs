@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Album","A album resource"],["Artist","A artist resource"],["Track","A track resource"],["UsersAlbums",""],["UsersArtists",""],["UsersTracks",""]]});
