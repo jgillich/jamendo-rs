@@ -1,10 +1,12 @@
 #[derive(Serialize, Deserialize, Debug)]
+#[doc(hidden)]
 pub struct Response<T> {
     pub headers: ResponseHeaders,
     pub results: Vec<T>
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[doc(hidden)]
 pub struct ResponseHeaders {
     pub status: String,
     pub code: i32,
@@ -13,6 +15,7 @@ pub struct ResponseHeaders {
     pub results_count: i32,
 }
 
+/// A album resource
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Album {
     pub id: String,
@@ -26,6 +29,7 @@ pub struct Album {
     pub shareurl: String,
 }
 
+/// A artist resource
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Artist {
     pub id: String,
@@ -37,6 +41,7 @@ pub struct Artist {
     pub shareurl: String,
 }
 
+/// A track resource
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Track {
     pub id: String,

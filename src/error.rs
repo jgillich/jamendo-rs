@@ -65,6 +65,7 @@ impl From<ErrorKind> for Error {
 }
 
 #[derive(Debug)]
+#[doc(hidden)]
 pub enum ErrorKind {
     InvalidQuery,
     ResourceNotFound,

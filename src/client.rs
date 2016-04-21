@@ -4,6 +4,7 @@ use {Action, Resource, Album, Artist, Track};
 
 const API_URL: &'static str = "https://api.jamendo.com/v3.0";
 
+/// The Client is used to create actions
 pub struct Client {
     transport: Transport,
 }

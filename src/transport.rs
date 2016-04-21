@@ -8,6 +8,7 @@ use ErrorKind;
 use serde::de::Deserialize;
 
 #[derive(Debug)]
+#[doc(hidden)]
 pub struct Transport {
     client_id: String,
     base_url: url::Url,

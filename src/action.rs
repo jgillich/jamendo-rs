@@ -2,6 +2,7 @@ use serde;
 use std::marker::PhantomData;
 use {Transport, Error, ErrorKind};
 
+/// Action represents the request to a resource
 pub struct Action<'a, T> where T: 'a + serde::de::Deserialize {
     transport: &'a Transport,
     resource: Resource,
@@ -10,6 +11,7 @@ pub struct Action<'a, T> where T: 'a + serde::de::Deserialize {
 }
 
 impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
+    #[doc(hidden)]
     pub fn new(transport: &'a Transport, resource: Resource) -> Self {
         Action {
             transport: transport,
@@ -95,6 +97,7 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
     }
 }
 
+#[doc(hidden)]
 pub enum Resource {
     GetAlbums,
     GetUsersAlbums,
@@ -104,6 +107,7 @@ pub enum Resource {
     GetUsersTracks,
 }
 
+/// A query parameter
 pub enum Query {
     UserId(i32),
     Offset(i32),
