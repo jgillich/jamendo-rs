@@ -13,7 +13,9 @@ fn get_albums() {
 fn get_album() {
     let client = Client::new(jamendo::TEST_ID);
     let albums = client.get_albums().album_id(24).unwrap();
-    assert_eq!("Premiers Jets", albums.first().unwrap().name);
+    let album = albums.first().unwrap();
+    assert_eq!("Premiers Jets", album.name);
+    assert_eq!(24, album.id);
 }
 
 #[test]

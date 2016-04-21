@@ -18,7 +18,7 @@ pub struct ResponseHeaders {
 /// A album resource
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Album {
-    pub id: String,
+    pub id: u32,
     pub name: String,
     pub releasedate: String,
     pub artist_id: String,
@@ -32,7 +32,7 @@ pub struct Album {
 /// A artist resource
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Artist {
-    pub id: String,
+    pub id: u32,
     pub name: String,
     pub website: String,
     pub joindate: String,
@@ -44,7 +44,7 @@ pub struct Artist {
 /// A track resource
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Track {
-    pub id: String,
+    pub id: u32,
     pub name: String,
     pub duration: u32,
     pub artist_id: String,
