@@ -32,7 +32,7 @@ mod transport;
 pub const TEST_ID: &'static str = "56d30c95";
 
 pub use action::{Action, Resource, Query};
-pub use response::{Response, Album, Artist, Track, UsersAlbums, UsersArtists, UsersTracks};
+pub use response::{Response, Album, Artist, Track, UsersAlbums, UsersArtists, UsersTracks, PartialAlbum, PartialArtist, PartialTrack};
 pub use client::Client;
 pub use error::{Error, ErrorKind};
 pub use transport::Transport;
