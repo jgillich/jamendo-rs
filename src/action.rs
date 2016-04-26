@@ -99,6 +99,7 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
         Ok(self.transport.get(path, query_pairs)?.results)
     }
 
+    /// Shorthand for .run().unwrap()
     pub fn unwrap(self) -> Vec<T> {
         self.run().unwrap()
     }

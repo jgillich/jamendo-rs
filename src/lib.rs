@@ -37,3 +37,7 @@ pub use client::Client;
 pub use error::{Error, ErrorKind};
 pub use transport::Transport;
 
+/// Shorthand for Client::new()
+pub fn new(client_id: &str) -> Client {
+    Client::new(client_id)
+}
