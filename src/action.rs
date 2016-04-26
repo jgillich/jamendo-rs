@@ -35,6 +35,7 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
     pub fn album_name(self, v: &str) -> Self { self.set(Query::AlbumName(v.into())) }
     pub fn artist_name(self, v: &str) -> Self { self.set(Query::ArtistName(v.into())) }
     pub fn track_name(self, v: &str) -> Self { self.set(Query::TrackName(v.into())) }
+    pub fn user_name(self, v: &str) -> Self { self.set(Query::UserName(v.into())) }
     pub fn name_search(self, v: &str) -> Self { self.set(Query::NameSearch(v.into())) }
     pub fn featured(self, v: bool) -> Self { self.set(Query::Featured(v)) }
 
@@ -84,6 +85,10 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
                     GetTracks => ("name", v.clone()),
                     _ => ("track_name", v.clone()),
                 },
+                &UserName(ref v) => match self.resource {
+                    GetUsersAlbums | GetUsersArtists | GetUsersTracks => ("name", v.clone()),
+                    _ => return Err(Error::Client(ErrorKind::InvalidQuery)),
+                },
                 &NameSearch(ref v) => ("namesearch", v.clone()),
                 &Featured(ref v) => ("featured", v.to_string()),
             });
@@ -117,6 +122,7 @@ pub enum Query {
     TrackId(u32),
     AlbumName(String),
     ArtistName(String),
+    UserName(String),
     TrackName(String),
     NameSearch(String),
     Featured(bool),
