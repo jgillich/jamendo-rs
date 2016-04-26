@@ -27,6 +27,7 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
     }
 
     pub fn user_id(self, v: u32) -> Self { self.set(Query::UserId(v)) }
+    pub fn user_name(self, v: &str) -> Self { self.set(Query::UserName(v.into())) }
     pub fn offset(self, v: u32) -> Self { self.set(Query::Offset(v)) }
     pub fn limit(self, v: u32) -> Self { self.set(Query::Limit(v)) }
     pub fn album_id(self, v: u32) -> Self { self.set(Query::AlbumId(v)) }
@@ -35,7 +36,6 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
     pub fn album_name(self, v: &str) -> Self { self.set(Query::AlbumName(v.into())) }
     pub fn artist_name(self, v: &str) -> Self { self.set(Query::ArtistName(v.into())) }
     pub fn track_name(self, v: &str) -> Self { self.set(Query::TrackName(v.into())) }
-    pub fn user_name(self, v: &str) -> Self { self.set(Query::UserName(v.into())) }
     pub fn name_search(self, v: &str) -> Self { self.set(Query::NameSearch(v.into())) }
     pub fn featured(self, v: bool) -> Self { self.set(Query::Featured(v)) }
 
@@ -44,6 +44,7 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
         use Query::*;
 
         let path = match self.resource {
+            GetUsers => "users",
             GetAlbums => "albums",
             GetUsersAlbums => "users/albums",
             GetArtists => "artists",
@@ -56,7 +57,7 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
         for q in self.query.iter() {
             query_pairs.push(match q {
                 &UserId(ref v) => match self.resource {
-                    GetUsersAlbums | GetUsersArtists | GetUsersTracks => ("id", v.to_string()),
+                    GetUsers | GetUsersAlbums | GetUsersArtists | GetUsersTracks => ("id", v.to_string()),
                     _ => return Err(Error::Client(ErrorKind::InvalidQuery)),
                 },
                 &Offset(ref v) => ("offset", v.to_string()),
@@ -86,7 +87,8 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
                     _ => ("track_name", v.clone()),
                 },
                 &UserName(ref v) => match self.resource {
-                    GetUsersAlbums | GetUsersArtists | GetUsersTracks => ("name", v.clone()),
+                    // for some reason, this isn't supported by users/tracks
+                    GetUsers | GetUsersAlbums | GetUsersArtists => ("name", v.clone()),
                     _ => return Err(Error::Client(ErrorKind::InvalidQuery)),
                 },
                 &NameSearch(ref v) => ("namesearch", v.clone()),
@@ -104,6 +106,7 @@ impl<'a, T> Action<'a, T> where T: 'a + serde::de::Deserialize {
 
 /// A resource endpoint
 pub enum Resource {
+    GetUsers,
     GetAlbums,
     GetUsersAlbums,
     GetArtists,

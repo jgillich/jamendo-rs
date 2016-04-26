@@ -3,6 +3,16 @@ extern crate jamendo;
 use jamendo::Client;
 
 #[test]
+fn get_user() {
+    let client = Client::new(jamendo::TEST_ID);
+    let users = client.get_users().user_id(972174).unwrap();
+    assert_eq!("claudod", users.first().unwrap().name);
+
+    let users = client.get_users().user_name("claudod").unwrap();
+    assert_eq!(972174, users.first().unwrap().id);
+}
+
+#[test]
 fn get_albums() {
     let client = Client::new(jamendo::TEST_ID);
     let albums = client.get_albums().limit(15).unwrap();

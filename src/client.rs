@@ -1,6 +1,5 @@
 use url::Url;
-use {Transport};
-use {Action, Resource, Album, Artist, Track, UsersAlbums, UsersArtists, UsersTracks};
+use {Transport, Action, Resource, User, Album, Artist, Track, UserAlbums, UserArtists, UserTracks};
 
 const API_URL: &'static str = "https://api.jamendo.com/v3.0";
 
@@ -17,11 +16,15 @@ impl Client {
         }
     }
 
+    pub fn get_users(&self) -> Action<User> {
+        Action::new(&self.transport, Resource::GetUsers)
+    }
+
     pub fn get_albums(&self) -> Action<Album> {
         Action::new(&self.transport, Resource::GetAlbums)
     }
 
-    pub fn get_users_albums(&self) -> Action<UsersAlbums> {
+    pub fn get_users_albums(&self) -> Action<UserAlbums> {
         Action::new(&self.transport, Resource::GetUsersAlbums)
     }
 
@@ -29,7 +32,7 @@ impl Client {
         Action::new(&self.transport, Resource::GetArtists)
     }
 
-    pub fn get_users_artists(&self) -> Action<UsersArtists> {
+    pub fn get_users_artists(&self) -> Action<UserArtists> {
         Action::new(&self.transport, Resource::GetUsersArtists)
     }
 
@@ -37,7 +40,7 @@ impl Client {
         Action::new(&self.transport, Resource::GetTracks)
     }
 
-    pub fn get_users_tracks(&self) -> Action<UsersTracks> {
+    pub fn get_users_tracks(&self) -> Action<UserTracks> {
         Action::new(&self.transport, Resource::GetUsersTracks)
     }
 

@@ -65,6 +65,17 @@ pub struct Track {
     //pub musicinfo:
 }
 
+/// A user resource
+#[derive(Serialize, Deserialize, Debug)]
+pub struct User {
+    pub id: u32,
+    pub name: String,
+    pub dispname: String,
+    pub image: String,
+    pub creationdate: String,
+    pub lang: String,
+}
+
 /// Album returned by users/albums
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PartialAlbum {
@@ -79,7 +90,7 @@ pub struct PartialAlbum {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct UsersAlbums {
+pub struct UserAlbums {
     pub name: String,
     pub dispname: String,
     pub id: u32,
@@ -101,7 +112,7 @@ pub struct PartialArtist {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct UsersArtists {
+pub struct UserArtists {
     pub name: String,
     pub dispname: String,
     pub id: u32,
@@ -136,7 +147,7 @@ pub struct TrackRelations {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct UsersTracks {
+pub struct UserTracks {
     pub name: String,
     pub dispname: String,
     pub id: u32,
