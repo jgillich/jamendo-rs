@@ -42,10 +42,9 @@ impl Transport {
 
     fn make_url(&self, path: &str, mut query_pairs: Vec<(&str, String)>) -> url::Url {
         let mut url = self.base_url.clone();
-        let base_path: String = url.path().into();
+        let path = format!("{}/{}", url.path(), path);
 
-        url.set_path(&format!("{}/{}", base_path, path));
-
+        url.set_path(&path);
 
         query_pairs.push(("client_id", self.client_id.clone()));
         query_pairs.push(("format", "json".to_string()));
