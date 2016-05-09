@@ -1,8 +1,11 @@
 [package]
 name = "jamendo"
+description = "Jamendo API client"
 version = "0.1.0"
 authors = ["Jakob Gillich <jakob@gillich.me>"]
 license = "MIT"
+documentation = "https://jgillich.github.io/jamendo-rs/jamendo/index.html"
+repository = "https://github.com/jgillich/jamendo-rs"
 
 [dependencies]
 serde = "0.7"
